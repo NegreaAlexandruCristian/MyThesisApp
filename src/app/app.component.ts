@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {HideHeaderSidebarService} from "./services/HideHeaderSidebarService";
 
 @Component({
   selector: 'app-root',
@@ -10,12 +11,17 @@ export class AppComponent {
   sideBarOpen = true;
   headerBar = true;
 
+  data: any = undefined;
+
   sideBarToggle(): void {
     this.sideBarOpen = !this.sideBarOpen;
   }
 
-  receiveData(event: { sideBarOpen: boolean, headerBarOpen: boolean }) {
-    this.sideBarOpen = event.sideBarOpen;
-    this.headerBar = event.headerBarOpen;
+  constructor(private hideHeaderSidebarService: HideHeaderSidebarService) {
+    this.hideHeaderSidebarService.data.subscribe(data => {
+      this.data = data;
+      this.sideBarOpen = this.data.sideBarOpen;
+      this.headerBar = this.data.headerBarOpen;
+    });
   }
 }

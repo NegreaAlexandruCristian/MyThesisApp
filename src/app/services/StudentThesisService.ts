@@ -6,4 +6,8 @@ export class StudentThesisService {
   getStudentsThesis(studentId: number): Thesis[] {
     return thesisConstants;
   }
+
+  getAllThesis(): Thesis[] {
+    return thesisConstants;
+  }
 }

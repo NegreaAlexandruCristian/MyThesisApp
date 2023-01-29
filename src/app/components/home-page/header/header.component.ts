@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { HideHeaderSidebarService } from "../../../services/HideHeaderSidebarService";
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private headerSidebarService: HideHeaderSidebarService) {}
 
   ngOnInit(): void {}
 
@@ -17,10 +18,8 @@ export class HeaderComponent implements OnInit {
     this.toggleSidebarForMe.emit();
   }
 
-  @Output() data = new EventEmitter<any>();
-
   sendData() {
-    this.data.emit({ sideBarOpen: false, headerBarOpen: false });
+    this.headerSidebarService.sendData({ sideBarOpen: false, headerBarOpen: false })
   }
 
   logout() {
