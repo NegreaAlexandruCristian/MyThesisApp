@@ -3,3 +3,8 @@
   width: 50%;
   height: 50%;
 }
+
+.table-responsive {
+  padding-left: 10px;
+  padding-right: 10px;
+}

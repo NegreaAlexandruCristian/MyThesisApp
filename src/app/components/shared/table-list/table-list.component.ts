@@ -9,13 +9,24 @@ import {StudentThesisService} from "../../../services/StudentThesisService";
 })
 export class TableListComponent {
   private studentThesisService: StudentThesisService;
+  private listThesis: Thesis[] = [];
+  filterLevel: string = "";
+  filterSpecialization: string = "";
+  filterTopic: string = "";
+  uniqueLevels: string[] = [];
+  uniqueSpecializations: string[] = [];
+  uniqueTopics: string[] = [];
 
   constructor() {
     this.studentThesisService = new StudentThesisService();
   }
 
   getStudentsThesis(studentId: number): Thesis[] {
-    return this.studentThesisService.getStudentsThesis(1);
+    this.listThesis = this.studentThesisService.getStudentsThesis(studentId);
+    this.uniqueLevels = Array.from(new Set(this.listThesis.map(th => th.level)))
+    this.uniqueSpecializations = Array.from(new Set(this.listThesis.map(th => th.specialization)))
+    this.uniqueTopics = Array.from(new Set(this.listThesis.map(th => th.topic)))
+    return this.listThesis;
   }
 
   onButtonClick(): void {

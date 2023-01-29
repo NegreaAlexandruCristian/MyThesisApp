@@ -20,6 +20,9 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import {MatButtonModule} from "@angular/material/button";
 import { TableListComponent } from './components/shared/table-list/table-list.component';
+import { FilterByTopicPipe } from './components/shared/table-list/filters/filter-by-topic/filter-by-topic.component';
+import { FilterByLevelPipe } from './components/shared/table-list/filters/filter-by-level/filter-by-level.component';
+import { FilterBySpecializationPipe } from './components/shared/table-list/filters/filter-by-specialization/filter-by-specialization.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,9 @@ import { TableListComponent } from './components/shared/table-list/table-list.co
     HeaderComponent,
     DashboardComponent,
     TableListComponent,
+    FilterByTopicPipe,
+    FilterByLevelPipe,
+    FilterBySpecializationPipe,
   ],
     imports: [
         BrowserModule,
