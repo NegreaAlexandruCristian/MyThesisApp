@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Thesis} from "../../models/Thesis";
-import {StudentThesisService} from "../../../services/StudentThesisService";
+import {ThesisService} from "../../../services/ThesisService";
 
 @Component({
   selector: 'app-table-list',
@@ -8,7 +8,7 @@ import {StudentThesisService} from "../../../services/StudentThesisService";
   styleUrls: ['./table-list.component.css']
 })
 export class TableListComponent {
-  private studentThesisService: StudentThesisService;
+  private thesisService: ThesisService;
   private listThesis: Thesis[] = [];
   filterLevel: string = "";
   filterSpecialization: string = "";
@@ -17,12 +17,18 @@ export class TableListComponent {
   uniqueSpecializations: string[] = [];
   uniqueTopics: string[] = [];
 
+  @Input() data: boolean | undefined;
+
   constructor() {
-    this.studentThesisService = new StudentThesisService();
+    this.thesisService = new ThesisService();
   }
 
   getStudentsThesis(studentId: number): Thesis[] {
-    this.listThesis = this.studentThesisService.getStudentsThesis(studentId);
+    if (this.data) {
+      this.listThesis = this.thesisService.getStudentThesis(studentId);
+    } else {
+      this.listThesis = this.thesisService.getAllThesis();
+    }
     this.uniqueLevels = Array.from(new Set(this.listThesis.map(th => th.level)))
     this.uniqueSpecializations = Array.from(new Set(this.listThesis.map(th => th.specialization)))
     this.uniqueTopics = Array.from(new Set(this.listThesis.map(th => th.topic)))
