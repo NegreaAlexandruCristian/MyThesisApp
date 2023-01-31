@@ -11,7 +11,7 @@ import {HomeComponent} from "./components/home-page/home/home.component";
 import {SidenavComponent} from "./components/home-page/sidenav/sidenav.component";
 import {HeaderComponent} from "./components/home-page/header/header.component";
 import {DashboardComponent} from "./components/home-page/dashboard/dashboard.component";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
@@ -19,10 +19,12 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import {MatButtonModule} from "@angular/material/button";
-import { TableListComponent } from './components/shared/table-list/table-list.component';
-import { FilterByTopicPipe } from './components/shared/table-list/filters/filter-by-topic/filter-by-topic.component';
-import { FilterByLevelPipe } from './components/shared/table-list/filters/filter-by-level/filter-by-level.component';
-import { FilterBySpecializationPipe } from './components/shared/table-list/filters/filter-by-specialization/filter-by-specialization.component';
+import {TableListComponent} from './components/shared/table-list/table-list.component';
+import {FilterByTopicPipe} from './components/shared/table-list/filters/filter-by-topic/filter-by-topic.component';
+import {FilterByLevelPipe} from './components/shared/table-list/filters/filter-by-level/filter-by-level.component';
+import {
+  FilterBySpecializationPipe
+} from './components/shared/table-list/filters/filter-by-specialization/filter-by-specialization.component';
 
 @NgModule({
   declarations: [
@@ -38,22 +40,22 @@ import { FilterBySpecializationPipe } from './components/shared/table-list/filte
     FilterByLevelPipe,
     FilterBySpecializationPipe,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        NgbModule,
-        FontAwesomeModule,
-        BrowserAnimationsModule,
-        // * MATERIAL IMPORTS
-        MatSidenavModule,
-        MatToolbarModule,
-        MatMenuModule,
-        MatIconModule,
-        MatDividerModule,
-        MatListModule,
-        MatButtonModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    NgbModule,
+    FontAwesomeModule,
+    BrowserAnimationsModule,
+    // * MATERIAL IMPORTS
+    MatSidenavModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
+    MatDividerModule,
+    MatListModule,
+    MatButtonModule,
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Thesis} from "../../models/Thesis";
 import {ThesisService} from "../../../services/ThesisService";
 
@@ -7,9 +7,9 @@ import {ThesisService} from "../../../services/ThesisService";
   templateUrl: './table-list.component.html',
   styleUrls: ['./table-list.component.css']
 })
-export class TableListComponent {
+export class TableListComponent implements OnInit {
   private thesisService: ThesisService;
-  private listThesis: Thesis[] = [];
+  listThesis: Thesis[] = [];
   filterLevel: string = "";
   filterSpecialization: string = "";
   filterTopic: string = "";
@@ -23,19 +23,26 @@ export class TableListComponent {
     this.thesisService = new ThesisService();
   }
 
-  getStudentsThesis(studentId: number): Thesis[] {
+  ngOnInit(): void {
+    this.getStudentsThesis(1).then(() => undefined)
+  }
+
+  async getStudentsThesis(studentId: number): Promise<void> {
     if (this.data) {
       this.listThesis = this.thesisService.getStudentThesis(studentId);
     } else {
-      this.listThesis = this.thesisService.getAllThesis();
+      this.listThesis = await this.thesisService.getAllThesis();
     }
+    this.processActionTypeForThesis()
     this.uniqueLevels = Array.from(new Set(this.listThesis.map(th => th.level)))
     this.uniqueSpecializations = Array.from(new Set(this.listThesis.map(th => th.specialization)))
     this.uniqueTopics = Array.from(new Set(this.listThesis.map(th => th.topic)))
-    return this.listThesis;
   }
 
   onButtonClick(): void {
+  }
 
+  private processActionTypeForThesis(): void {
+    this.listThesis.map(th => th.status == "Finished" ? th.action = "View": th.action = "Edit")
   }
 }

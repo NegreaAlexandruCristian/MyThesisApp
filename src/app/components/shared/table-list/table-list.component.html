@@ -44,7 +44,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let item of getStudentsThesis(1) | filterLevel:filterLevel
+    <tr *ngFor="let item of this.listThesis | filterLevel:filterLevel
      | filterSpecialization:filterSpecialization | filterTopic: filterTopic">
       <td>{{ item.no }}</td>
       <td>{{ item.topic }}</td>
