@@ -8,7 +8,6 @@ import {ThesisService} from "../../../services/ThesisService";
   styleUrls: ['./table-list.component.css']
 })
 export class TableListComponent implements OnInit {
-  private thesisService: ThesisService;
   listThesis: Thesis[] = [];
   filterLevel: string = "";
   filterSpecialization: string = "";
@@ -19,8 +18,7 @@ export class TableListComponent implements OnInit {
 
   @Input() data: boolean | undefined;
 
-  constructor() {
-    this.thesisService = new ThesisService();
+  constructor(private thesisService: ThesisService) {
   }
 
   ngOnInit(): void {

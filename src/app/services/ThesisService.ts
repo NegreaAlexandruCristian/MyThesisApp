@@ -1,18 +1,14 @@
-import {API_KEY, API_URL, thesisConstants} from "../constants/ThesisConstants";
+import {thesisConstants} from "../constants/ThesisConstants";
 import {Thesis} from "../components/models/Thesis";
-import {createClient} from '@supabase/supabase-js';
+import {SupabaseDatabaseService} from "./SupabaseDatabaseService";
+import {Injectable} from "@angular/core";
 
-
+@Injectable({
+  providedIn: 'root'
+})
 export class ThesisService {
 
-  private supabaseUrl: string = "";
-  private supabaseKey: string = "";
-  private supabase: any = undefined;
-
-  constructor() {
-    this.supabaseUrl = API_URL;
-    this.supabaseKey = API_KEY;
-    this.supabase = createClient(this.supabaseUrl, this.supabaseKey)
+  constructor(private readonly supabaseDatabaseService: SupabaseDatabaseService) {
   }
 
   // TODO make an actual post or get request to retrieve thesis for a specific student
@@ -22,7 +18,7 @@ export class ThesisService {
   }
 
   async getAllThesis(): Promise<Thesis[]> {
-    let { data: thesis, error } = await this.supabase
+    let {data: thesis, error} = await this.supabaseDatabaseService.supabase
       .from('thesis')
       .select('*')
     if (error) {
