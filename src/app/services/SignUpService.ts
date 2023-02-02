@@ -24,7 +24,7 @@ export class SignUpService {
       throw new Error("Couldn't signup. Please check all the fields, none of them should be empty!")
     }
     username = typeof username === 'undefined' ? firstName + "." + lastName : username;
-    const {data, error} = await this.supabaseDatabaseService.supabase
+    await this.supabaseDatabaseService.supabase
       .from('students')
       .insert([
         {first_name: firstName, last_name: lastName, password: password, email: email, username: username},

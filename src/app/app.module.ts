@@ -25,6 +25,7 @@ import {FilterByLevelPipe} from './components/shared/table-list/filters/filter-b
 import {
   FilterBySpecializationPipe
 } from './components/shared/table-list/filters/filter-by-specialization/filter-by-specialization.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import {
     FilterByTopicPipe,
     FilterByLevelPipe,
     FilterBySpecializationPipe,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,

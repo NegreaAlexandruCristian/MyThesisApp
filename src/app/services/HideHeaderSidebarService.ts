@@ -10,8 +10,4 @@ export class HideHeaderSidebarService {
   sendData(data: any) {
     this.data.next(data);
   }
-
-  getData() {
-    return this.data.asObservable();
-  }
 }

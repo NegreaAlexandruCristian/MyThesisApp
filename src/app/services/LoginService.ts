@@ -23,7 +23,7 @@ export class LoginService {
         .eq('last_name', lastName)
         .eq('password', password);
       console.log(student)
-      if (typeof student == 'undefined') {
+      if (student.length < 1 || typeof student == 'undefined') {
         throw new Error("Couldn't login. Please check your username and password!")
       }
       if (error) {
