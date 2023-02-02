@@ -1,8 +1,5 @@
 import {SupabaseDatabaseService} from "./SupabaseDatabaseService";
 import {Injectable} from "@angular/core";
-import {Student} from "../components/models/Student";
-import {API_KEY, API_URL} from "../constants/ThesisConstants";
-import {createClient} from "@supabase/supabase-js";
 
 @Injectable({
   providedIn: 'root'

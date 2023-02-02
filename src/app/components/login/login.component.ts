@@ -3,7 +3,6 @@ import {NgForm} from "@angular/forms";
 import {Router} from "@angular/router";
 import {HideHeaderSidebarService} from "../../services/HideHeaderSidebarService";
 import {LoginService} from "../../services/LoginService";
-import {Student} from "../models/Student";
 
 @Component({
   selector: 'app-login',
@@ -39,8 +38,7 @@ export class LoginComponent implements OnInit {
   async login(formData: NgForm): Promise<void> {
     this.username = formData.value.username;
     this.password = formData.value.password;
-    const student = await this.loginService.login(this.username, this.password);
-    console.log(student)
+    await this.loginService.login(this.username, this.password);
     this.sendData();
     this.router.navigateByUrl("/home");
   }
