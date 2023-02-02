@@ -10,7 +10,7 @@ export class LoginService {
   }
 
   async login(username: string | undefined, password: string | undefined): Promise<void> {
-    if(typeof username == 'undefined') {
+    if (typeof username == 'undefined') {
       throw new Error("Couldn't login. Please check your username and password!")
     } else {
       const usernameParts = username.split(".")
@@ -22,7 +22,6 @@ export class LoginService {
         .eq('first_name', firstName)
         .eq('last_name', lastName)
         .eq('password', password);
-      console.log(student)
       if (student.length < 1 || typeof student == 'undefined') {
         throw new Error("Couldn't login. Please check your username and password!")
       }

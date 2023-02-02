@@ -22,12 +22,12 @@ export class TableListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getStudentsThesis(1).then(() => undefined)
+    this.getStudentsThesis(2).then(() => undefined)
   }
 
   async getStudentsThesis(studentId: number): Promise<void> {
-    if (this.data) {
-      this.listThesis = this.thesisService.getStudentThesis(studentId);
+    if (!this.data) {
+      this.listThesis = await this.thesisService.getStudentThesis(studentId);
     } else {
       this.listThesis = await this.thesisService.getAllThesis();
     }
@@ -41,6 +41,6 @@ export class TableListComponent implements OnInit {
   }
 
   private processActionTypeForThesis(): void {
-    this.listThesis.map(th => th.status == "Finished" ? th.action = "View": th.action = "Edit")
+    this.listThesis.map(th => th.status == "Finished" ? th.action = "View" : th.action = "Edit")
   }
 }
