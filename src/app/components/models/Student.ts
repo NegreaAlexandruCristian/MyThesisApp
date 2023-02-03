@@ -1,14 +1,17 @@
 export class Student {
   private _no: number;
-  private _first_name: string;
-  private _last_name: string;
+  private _firstName: string;
+  private _lastName: string;
+  private _username: string;
+  private _email: string;
 
-  constructor(no: number, first_name: string, last_name: string) {
+  constructor(no: number, first_name: string, last_name: string, username: string, email: string) {
     this._no = no;
-    this._first_name = first_name;
-    this._last_name = last_name;
+    this._firstName = first_name;
+    this._lastName = last_name;
+    this._username = username;
+    this._email = email;
   }
-
 
   get no(): number {
     return this._no;
@@ -18,19 +21,35 @@ export class Student {
     this._no = value;
   }
 
-  get first_name(): string {
-    return this._first_name;
+  get firstName(): string {
+    return this._firstName;
   }
 
-  set first_name(value: string) {
-    this._first_name = value;
+  set firstName(value: string) {
+    this._firstName = value;
   }
 
-  get last_name(): string {
-    return this._last_name;
+  get lastName(): string {
+    return this._lastName;
   }
 
-  set last_name(value: string) {
-    this._last_name = value;
+  set lastName(value: string) {
+    this._lastName = value;
+  }
+
+  get username(): string {
+    return this._username;
+  }
+
+  set username(value: string) {
+    this._username = value;
+  }
+
+  get email(): string {
+    return this._email;
+  }
+
+  set email(value: string) {
+    this._email = value;
   }
 }

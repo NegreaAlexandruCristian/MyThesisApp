@@ -1,5 +1,6 @@
 import {SupabaseDatabaseService} from "./SupabaseDatabaseService";
 import {Injectable} from "@angular/core";
+import {Student} from "../components/models/Student";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class LoginService {
   constructor(private supabaseDatabaseService: SupabaseDatabaseService) {
   }
 
-  async login(username: string | undefined, password: string | undefined): Promise<void> {
+  private async getStudent(username: string | undefined, password: string | undefined): Promise<void> {
     if (typeof username == 'undefined') {
       throw new Error("Couldn't login. Please check your username and password!")
     } else {
@@ -31,5 +32,20 @@ export class LoginService {
       }
       return student;
     }
+  }
+
+  async login(username: string | undefined, password: string | undefined): Promise<void> {
+    let student: any = await this.getStudent(username, password);
+    student = this.transformObject(student[0])
+  }
+
+  private transformObject(obj: any): Student {
+    return <Student>{
+      no: obj.no,
+      firstName: obj.first_name,
+      lastName: obj.last_name,
+      username: obj.username,
+      email: obj.email,
+    };
   }
 }
