@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Thesis} from "../../models/Thesis";
 import {ThesisService} from "../../../services/ThesisService";
+import {AppState} from "../../../states/AppState";
 
 @Component({
   selector: 'app-table-list',
@@ -18,11 +19,14 @@ export class TableListComponent implements OnInit {
 
   @Input() data: boolean | undefined;
 
-  constructor(private thesisService: ThesisService) {
+  constructor(
+    private thesisService: ThesisService,
+    private appState: AppState
+  ) {
   }
 
   ngOnInit(): void {
-    this.getStudentsThesis(2).then(() => undefined)
+    this.getStudentsThesis(this.appState.getUser().no).then(() => undefined)
   }
 
   async getStudentsThesis(studentId: number): Promise<void> {

@@ -33,7 +33,7 @@ export class ThesisService {
       //TODO do something more special
       console.log(error)
     }
-    return thesisData;
+    return thesisData.length < 1 ? [] : thesisData;
   }
 
   async getAllThesis(): Promise<Thesis[]> {

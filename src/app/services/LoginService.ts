@@ -34,9 +34,9 @@ export class LoginService {
     }
   }
 
-  async login(username: string | undefined, password: string | undefined): Promise<void> {
+  async login(username: string | undefined, password: string | undefined): Promise<Student> {
     let student: any = await this.getStudent(username, password);
-    student = this.transformObject(student[0])
+    return this.transformObject(student[0])
   }
 
   private transformObject(obj: any): Student {

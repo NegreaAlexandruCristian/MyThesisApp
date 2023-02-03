@@ -1,25 +1,34 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { HideHeaderSidebarService } from "../../../services/HideHeaderSidebarService";
+import {AfterContentInit, Component, EventEmitter, Output} from '@angular/core';
+import {Router} from '@angular/router';
+import {HideHeaderSidebarService} from "../../../services/HideHeaderSidebarService";
+import {AppState} from "../../../states/AppState";
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements AfterContentInit {
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
+  username: string = '';
 
-  constructor(private router: Router, private headerSidebarService: HideHeaderSidebarService) {}
+  constructor(
+    private router: Router,
+    private headerSidebarService: HideHeaderSidebarService,
+    private appState: AppState
+  ) {
+  }
 
-  ngOnInit(): void {}
+  ngAfterContentInit(): void {
+    this.username = this.appState.getUser().username
+  }
 
   toggleSidebar() {
     this.toggleSidebarForMe.emit();
   }
 
   sendData() {
-    this.headerSidebarService.sendData({ sideBarOpen: false, headerBarOpen: false })
+    this.headerSidebarService.sendData({sideBarOpen: false, headerBarOpen: false})
   }
 
   logout() {

@@ -3,6 +3,8 @@ import {NgForm} from "@angular/forms";
 import {Router} from "@angular/router";
 import {HideHeaderSidebarService} from "../../services/HideHeaderSidebarService";
 import {LoginService} from "../../services/LoginService";
+import {Student} from "../models/Student";
+import {AppState} from "../../states/AppState";
 
 @Component({
   selector: 'app-login',
@@ -19,15 +21,17 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private headerSidebarService: HideHeaderSidebarService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private appState: AppState
   ) {
   }
 
   ngOnInit(): void {
+    this.sendData(false, false)
   }
 
-  sendData(): void {
-    this.headerSidebarService.sendData({ sideBarOpen: true, headerBarOpen: true })
+  sendData(sideBarOpen: boolean, headerBarOpen: boolean): void {
+    this.headerSidebarService.sendData({ sideBarOpen: sideBarOpen, headerBarOpen: headerBarOpen })
   }
   hideShowPassword() {
     this.isText = !this.isText;
@@ -38,8 +42,9 @@ export class LoginComponent implements OnInit {
   async login(formData: NgForm): Promise<void> {
     this.username = formData.value.username;
     this.password = formData.value.password;
-    await this.loginService.login(this.username, this.password);
-    this.sendData();
+    const student: Student = await this.loginService.login(this.username, this.password);
+    this.appState.setUser(student);
+    this.sendData(true, true);
     this.router.navigateByUrl("/home");
   }
 }

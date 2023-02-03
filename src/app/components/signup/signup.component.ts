@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SignUpService} from "../../services/SignUpService";
 import {NgForm} from "@angular/forms";
 import {Router} from "@angular/router";
@@ -9,7 +9,7 @@ import {HideHeaderSidebarService} from "../../services/HideHeaderSidebarService"
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit{
 
   type: string = "password"
   isText: boolean = false
@@ -30,8 +30,12 @@ export class SignupComponent {
     private headerSidebarService: HideHeaderSidebarService,
   ) {
   }
-  sendData(): void {
-    this.headerSidebarService.sendData({ sideBarOpen: true, headerBarOpen: true })
+
+  ngOnInit(): void {
+    this.sendData(false, false)
+    }
+  sendData(sideBarOpen: boolean, headerBarOpen: boolean): void {
+    this.headerSidebarService.sendData({ sideBarOpen: sideBarOpen, headerBarOpen: headerBarOpen })
   }
 
   hideShowPassword() {
@@ -60,7 +64,7 @@ export class SignupComponent {
       this.username,
       this.password
     );
-    this.sendData()
+    this.sendData(true, true)
     this.router.navigateByUrl("/home");
   }
 }
