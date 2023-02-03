@@ -47,15 +47,30 @@ export class ThesisService {
     return thesis;
   }
 
+  async getThesis(no: number): Promise<Thesis> {
+    let {data: thesis, error} = await this.supabaseDatabaseService.supabase
+      .from('thesis')
+      .select('*')
+      .eq('no', no)
+    if (error) {
+      //TODO do something more special
+      console.log(error)
+    }
+    const thesisData: Thesis[] = await thesis;
+    return this.transformObject(thesisData[0]);
+  }
+
   private transformObject(obj: any): Thesis {
     return <Thesis>{
       no: obj.no,
+      topic: obj.topic,
       level: obj.level,
       specialization: obj.specialization,
       university: obj.university,
       coordinator: obj.coordinator,
       status: obj.status,
-      action: obj.action
+      action: obj.action,
+      contentText: obj.content_text
     };
   }
 }

@@ -26,6 +26,8 @@ import {
   FilterBySpecializationPipe
 } from './components/shared/table-list/filters/filter-by-specialization/filter-by-specialization.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { NotepadComponent } from './components/shared/notepad/notepad.component';
+import {NgxEditorModule} from "ngx-editor";
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     FilterByLevelPipe,
     FilterBySpecializationPipe,
     ForgotPasswordComponent,
+    NotepadComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +52,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     NgbModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
+    NgxEditorModule,
     // * MATERIAL IMPORTS
     MatSidenavModule,
     MatToolbarModule,

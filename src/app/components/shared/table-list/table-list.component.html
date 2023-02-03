@@ -15,7 +15,8 @@
         <label for="filterSpecialization" class="font-weight-bold">Filter by Specialization:</label>
         <select class="form-control" id="filterSpecialization" [(ngModel)]="filterSpecialization">
           <option value="">All</option>
-          <option *ngFor="let specialization of uniqueSpecializations" [value]="specialization">{{ specialization }}</option>
+          <option *ngFor="let specialization of uniqueSpecializations"
+                  [value]="specialization">{{ specialization }}</option>
         </select>
       </div>
     </div>
@@ -53,7 +54,7 @@
       <td>{{ item.university }}</td>
       <td>{{ item.coordinator }}</td>
       <td>{{ item.status }}</td>
-      <button class="btn btn-sm btn-block" (click)="onButtonClick()">{{ item.action }}</button>
+      <button class="btn btn-sm btn-block" [routerLink]="['/edit-thesis/', item.no]">{{ item.action }}</button>
     </tr>
     </tbody>
   </table>

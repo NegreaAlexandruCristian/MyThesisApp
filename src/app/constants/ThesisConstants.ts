@@ -9,7 +9,8 @@ export const thesisConstants: Thesis[] = [
     "West University of Timisoara",
     "Lect. Dr. Monica Sancira",
     "Finished",
-    "View"
+    "View",
+    'Placeholder'
   ),
   new Thesis(
     2,
@@ -19,7 +20,8 @@ export const thesisConstants: Thesis[] = [
     "West University of Timisoara",
     "Lect. Dr. Monica Sancira",
     "Finished",
-    "View"
+    "View",
+    'Placeholder'
   ),
   new Thesis(
     3,
@@ -29,7 +31,8 @@ export const thesisConstants: Thesis[] = [
     "West University of Timisoara",
     "Lect. Dr. Monica Sancira",
     "Work in progress",
-    "View"
+    "View",
+    'Placeholder'
   )
 ]
 

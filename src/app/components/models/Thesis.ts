@@ -7,6 +7,7 @@ export class Thesis {
   private _coordinator: string;
   private _status: string;
   private _action: string;
+  private _contentText: string;
 
   constructor(
     no: number, topic: string,
@@ -15,7 +16,8 @@ export class Thesis {
     university: string,
     coordinator: string,
     status: string,
-    action: string
+    action: string,
+    contentText: string
   ) {
     this._no = no;
     this._level = level;
@@ -25,8 +27,8 @@ export class Thesis {
     this._coordinator = coordinator;
     this._status = status;
     this._action = action;
+    this._contentText = contentText;
   }
-
 
   get no(): number {
     return this._no;
@@ -90,5 +92,13 @@ export class Thesis {
 
   set action(value: string) {
     this._action = value;
+  }
+
+  get contentText(): string {
+    return this._contentText;
+  }
+
+  set contentText(value: string) {
+    this._contentText = value;
   }
 }

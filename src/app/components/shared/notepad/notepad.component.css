@@ -1,0 +1,15 @@
+.notepad {
+  width: 500px;
+  height: 400px;
+  margin: 0 auto;
+}
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+.text-area {
+  padding: 10px;
+  height: calc(100% - 50px);
+  overflow-y: scroll;
+}
