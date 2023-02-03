@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Editor} from "ngx-editor";
 import {ActivatedRoute} from "@angular/router";
 import {ThesisService} from "../../../services/ThesisService";
+import {Thesis} from "../../models/Thesis";
 
 @Component({
   selector: 'app-notepad',
@@ -13,6 +14,8 @@ export class NotepadComponent implements OnInit, OnDestroy {
   html = '';
   editorDisabled: boolean = false;
 
+  private thesis: Thesis | undefined;
+
   constructor(
     private route: ActivatedRoute,
     private thesisService: ThesisService
@@ -20,18 +23,27 @@ export class NotepadComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.editor = new Editor();
+    const showError = () => {
+      this.html = '<p style="color:red; font-weight:bold;"> Please select a thesis from the Dashboard located on the sidebar on the left side!</p>';
+      this.editorDisabled = true;
+    }
+    let content: string | undefined;
     this.route.params.subscribe(async params => {
-      this.editor = new Editor();
       const id = params['id'];
       if (id != 'none') {
-        this.editorDisabled = false;
-        const thesis = await this.thesisService.getThesis(id)
-        console.log(thesis.contentText)
-        const content: string = typeof thesis.contentText == 'undefined' || thesis.contentText === null ? 'Type here..' : thesis.contentText;
-        this.html = '<p> ' + content + ' </p>'
+        this.thesis = await this.thesisService.getThesis(id);
+        console.log(this.thesis)
+        console.log(this.thesis)
+        if (typeof this.thesis != 'undefined') {
+          this.editorDisabled = false;
+          content = typeof this.thesis.contentText == 'undefined' || this.thesis.contentText === null ? 'Type here..' : this.thesis.contentText;
+          this.html = content;
+        } else {
+          showError();
+        }
       } else {
-        this.html = '<p style="color:red; font-weight:bold;"> Please select a thesis from the Dashboard located on the sidebar on the left side!</p>';
-        this.editorDisabled = true;
+        showError();
       }
     });
   }
@@ -40,7 +52,13 @@ export class NotepadComponent implements OnInit, OnDestroy {
     this.editor?.destroy();
   }
 
-  saveText(): void {
-    //TODO save the text and make a save button
+  saveChanges(): void {
+    if (typeof this.thesis != 'undefined') {
+      this.thesisService.saveThesis(this.html, this.thesis.no).then(() => undefined)
+    }
+  }
+
+  editorChange($event: any) {
+    this.html = $event
   }
 }

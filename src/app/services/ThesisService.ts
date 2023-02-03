@@ -10,7 +10,6 @@ export class ThesisService {
   constructor(private readonly supabaseDatabaseService: SupabaseDatabaseService) {
   }
 
-  // TODO make an actual post or get request to retrieve thesis for a specific student
   async getStudentThesis(studentId: number): Promise<Thesis[]> {
     let {data: thesisIds, error} = await this.supabaseDatabaseService.supabase
       .from('student_thesis')
@@ -58,6 +57,22 @@ export class ThesisService {
     }
     const thesisData: Thesis[] = await thesis;
     return this.transformObject(thesisData[0]);
+  }
+
+  async saveThesis(content: string, no: number): Promise<void> {
+    console.log(content, no)
+    content = content.replaceAll('<p>', '')
+    content = content.replaceAll('</p>', '')
+    let {data: thesis, error} = await this.supabaseDatabaseService.supabase
+      .from('thesis')
+      .update({content_text: content})
+      .eq('no', no)
+      .select()
+    console.log(thesis)
+    if (error) {
+      //TODO do something more special
+      console.log(error)
+    }
   }
 
   private transformObject(obj: any): Thesis {

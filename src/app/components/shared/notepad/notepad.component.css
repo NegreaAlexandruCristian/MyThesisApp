@@ -13,3 +13,7 @@
   height: calc(100% - 50px);
   overflow-y: scroll;
 }
+
+.btn-editor {
+  padding: 5px;
+}
