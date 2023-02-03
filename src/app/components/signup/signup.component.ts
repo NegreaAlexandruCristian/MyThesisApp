@@ -3,6 +3,8 @@ import {SignUpService} from "../../services/SignUpService";
 import {NgForm} from "@angular/forms";
 import {Router} from "@angular/router";
 import {HideHeaderSidebarService} from "../../services/HideHeaderSidebarService";
+import {Student} from "../models/Student";
+import {AppState} from "../../states/AppState";
 
 @Component({
   selector: 'app-signup',
@@ -28,6 +30,7 @@ export class SignupComponent implements OnInit{
     private signUpService: SignUpService,
     private router: Router,
     private headerSidebarService: HideHeaderSidebarService,
+    private appState: AppState
   ) {
   }
 
@@ -57,13 +60,14 @@ export class SignupComponent implements OnInit{
     this.username = formData.value.username;
     this.password = formData.value.password;
     this.retypePassword = formData.value.retypePassword;
-    await this.signUpService.signUp(
+    const student: Student = await this.signUpService.signUp(
       this.firstName,
       this.lastName,
       this.email,
       this.username,
       this.password
     );
+    this.appState.setUser(student);
     this.sendData(true, true)
     this.router.navigateByUrl("/home");
   }

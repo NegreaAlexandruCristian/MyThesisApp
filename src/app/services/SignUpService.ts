@@ -1,5 +1,6 @@
 import {SupabaseDatabaseService} from "./SupabaseDatabaseService";
 import {Injectable} from "@angular/core";
+import {Student} from "../components/models/Student";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class SignUpService {
     email: string | undefined,
     username: string | undefined,
     password: string | undefined
-  ): Promise<void> {
+  ): Promise<Student> {
     if (
       typeof firstName == 'undefined' ||
       typeof lastName == 'undefined' ||
@@ -24,10 +25,12 @@ export class SignUpService {
       throw new Error("Couldn't signup. Please check all the fields, none of them should be empty!")
     }
     username = typeof username === 'undefined' ? firstName + "." + lastName : username;
-    await this.supabaseDatabaseService.supabase
+    const {data: student, error} = await this.supabaseDatabaseService.supabase
       .from('students')
       .insert([
         {first_name: firstName, last_name: lastName, password: password, email: email, username: username},
       ])
+      .select();
+    return student[0]
   }
 }
